@@ -406,6 +406,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8cf9dfc39c452b9685140ee4b54f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialRabbitCount: 50
+  initialWolfCount: 8
+  initialDeerCount: 30
+  initialFoodCount: 200
+  ecosystemSize: 100
+  ecosystemCenter: {x: 0, y: 0, z: 0}
+  rabbitPrefab: {fileID: 4317402730739108659, guid: 6d41f077c1f3e7646b4dafaa8dbb7f91, type: 3}
+  wolfPrefab: {fileID: 3341682824811785099, guid: 92e1f7e812230a14b8133c6eaec25d97, type: 3}
+  deerPrefab: {fileID: 1875419444040004351, guid: 8cbf41bf55c888e42afa4163a9f5f4e8, type: 3}
+  grassPrefab: {fileID: 2652067523439404646, guid: d746ec59e93da434c87d7bdc424a1627, type: 3}
+  showDebugInfo: 1
+  enableAutoBalance: 1
+  currentStats:
+    rabbitCount: 0
+    wolfCount: 0
+    deerCount: 0
+    totalAnimals: 0
+    foodCount: 0
+    averageEnergy: 0
+    balanceIndex: 0
 --- !u!4 &1278191137
 Transform:
   m_ObjectHideFlags: 0
