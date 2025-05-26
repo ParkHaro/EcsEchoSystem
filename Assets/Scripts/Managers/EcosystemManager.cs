@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿// Assets/Scripts/Managers/EcosystemManager.cs
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -32,10 +33,16 @@ public class EcosystemManager : MonoBehaviour
     // 통계 추적
     public EcosystemStats currentStats = new EcosystemStats();
     
+    // Random seed for consistent generation
+    private Unity.Mathematics.Random randomGen;
+    
     void Start()
     {
         world = World.DefaultGameObjectInjectionWorld;
         entityManager = world.EntityManager;
+        
+        // Initialize random generator
+        randomGen = new Unity.Mathematics.Random((uint)System.DateTime.Now.Millisecond);
         
         InitializeEcosystem();
         
@@ -111,12 +118,12 @@ public class EcosystemManager : MonoBehaviour
         entityManager.AddComponentData(entity, new CreatureComponent
         {
             animalType = AnimalType.Rabbit,
-            gender = UnityEngine.Random.value > 0.5f ? Gender.Male : Gender.Female,
+            gender = randomGen.NextBool() ? Gender.Male : Gender.Female,
             energy = 80f,
             maxEnergy = 100f,
             hungerRate = 8f,
             age = 0f,
-            lifespan = UnityEngine.Random.Range(8f, 12f),
+            lifespan = randomGen.NextFloat(8f, 12f),
             reproductionAge = 2f,
             size = 0.3f,
             weight = 2f,
@@ -193,12 +200,12 @@ public class EcosystemManager : MonoBehaviour
         entityManager.AddComponentData(entity, new CreatureComponent
         {
             animalType = AnimalType.Wolf,
-            gender = UnityEngine.Random.value > 0.5f ? Gender.Male : Gender.Female,
+            gender = randomGen.NextBool() ? Gender.Male : Gender.Female,
             energy = 120f,
             maxEnergy = 150f,
             hungerRate = 5f,
             age = 0f,
-            lifespan = UnityEngine.Random.Range(12f, 18f),
+            lifespan = randomGen.NextFloat(12f, 18f),
             reproductionAge = 3f,
             size = 1.2f,
             weight = 40f,
@@ -275,12 +282,12 @@ public class EcosystemManager : MonoBehaviour
         entityManager.AddComponentData(entity, new CreatureComponent
         {
             animalType = AnimalType.Deer,
-            gender = UnityEngine.Random.value > 0.5f ? Gender.Male : Gender.Female,
+            gender = randomGen.NextBool() ? Gender.Male : Gender.Female,
             energy = 100f,
             maxEnergy = 120f,
             hungerRate = 6f,
             age = 0f,
-            lifespan = UnityEngine.Random.Range(10f, 15f),
+            lifespan = randomGen.NextFloat(10f, 15f),
             reproductionAge = 2.5f,
             size = 1.0f,
             weight = 80f,
@@ -383,8 +390,8 @@ public class EcosystemManager : MonoBehaviour
     
     private Vector3 GetRandomSpawnPosition()
     {
-        float x = UnityEngine.Random.Range(-ecosystemSize / 2f, ecosystemSize / 2f);
-        float z = UnityEngine.Random.Range(-ecosystemSize / 2f, ecosystemSize / 2f);
+        float x = randomGen.NextFloat(-ecosystemSize / 2f, ecosystemSize / 2f);
+        float z = randomGen.NextFloat(-ecosystemSize / 2f, ecosystemSize / 2f);
         return ecosystemCenter + new Vector3(x, 0, z);
     }
     

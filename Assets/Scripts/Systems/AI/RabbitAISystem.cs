@@ -156,7 +156,8 @@ public partial struct RabbitAIJob : IJobEntity
             else
             {
                 // 호기심에 따라 탐험 vs 안전한 배회
-                if (UnityEngine.Random.value < personality.curiosity)
+                var random = new Unity.Mathematics.Random((uint)(position.x * 1000 + time * 1000));
+                if (random.NextFloat() < personality.curiosity)
                 {
                     ChangeState(ref aiState, AIState.Searching);
                 }
